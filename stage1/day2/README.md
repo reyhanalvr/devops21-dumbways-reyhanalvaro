@@ -103,4 +103,58 @@ Perintah `find` di Linux digunakan untuk mencari file dan direktori dalam sistem
 
 ![image](https://github.com/user-attachments/assets/9dbf14a0-586f-4eb6-a97a-6b7f899c9004)
 
+# 2. **Perbedaan antara IP Private & Public, serta IP Dynamic & Static**
+
+
+### `IP Private`
+
+`IP Private` adalah alamat IP yang digunakan dalam jaringan lokal dan tidak dapat diakses langsung dari internet. IP ini digunakan untuk perangkat yang terhubung dalam jaringan internal.
+Biasanya IP Private digunakan dalam sebuah jaringan rumah atau kantor, IP Private juga tidak bisa diakses secara langsung dari luar
+
+```
+Contoh IP Private:
+
+- 192.168.0.0 – 192.168.255.255
+- 172.16.0.0 – 172.31.255.255
+- 10.0.0.0 – 10.255.255.255
+```
+### `IP Public`
+
+`IP Public` adalah alamat IP yang digunakan untuk mengidentifikasi perangkat pada jaringan publik. IP ini diberikan oleh ISP dan dapat diakses dari mana saja melalui internet.
+IP Public juga bisa digunakan untuk berkomunikasi dengan perangkat lain di internet
+
+```
+Contoh IP Public
+- 8.8.8.8
+- 1.1.1.1
+
+```
+
+---
+### `IP Dynamic`
+`IP Dynamic` adalah alamat IP yang diberikan oleh server DHCP (Dynamic Host Configuration Protocol) dan dapat berubah-ubah setiap kali perangkat terhubung ke jaringan.
+
+```
+Kelebihan:
+
+- Pengelolaan lebih mudah.
+- Tidak membutuhkan konfigurasi manual.
+
+Kekurangan:
+
+- IP dapat berubah, sehingga tidak cocok untuk server yang membutuhkan alamat tetap.
+```
+
+### `IP Static`
+IP Static adalah alamat IP yang ditetapkan secara manual dan tidak berubah kecuali diubah secara manual oleh administrator.
+
+```
+Kelebihan:
+
+- IP tetap, cocok untuk server dan perangkat yang membutuhkan alamat konstan/tidak berubah-ubah.
+
+Kekurangan:
+
+- Membutuhkan konfigurasi manual dan lebih sulit dikelola jika ada banyak perangkat.
+```
 
