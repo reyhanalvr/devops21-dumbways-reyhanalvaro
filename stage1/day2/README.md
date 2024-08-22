@@ -45,9 +45,9 @@ perintah `rm` atau remove digunakan untuk menghapus file
 perintah `cp` atau copy digunakan untuk menyalin file/direktori 
 
 perintah cp juga bisa digunakan menyalin sekaligus mengganti nama file
-\n
+
 ![image](https://github.com/user-attachments/assets/0bc499d6-550e-4897-b600-add2ee6cd271)
-\n
+
 ![image](https://github.com/user-attachments/assets/8a5f2ee3-30a9-4e10-bb44-507f73b53ec6)
 
 ### 8. `mv`
@@ -63,4 +63,44 @@ perintah mv juga bisa digunakan untuk mengubah nama pada direktori yang sama
 perintah `grep` digunakan untuk mencari kata pada file atau output tertentu 
 
 contoh penggunaan 
+history | grep "teks-yang-akan-dicari"
+grep "teks" alvaro.js
+
+### 10. `sudo`
+Perintah sudo di Linux digunakan untuk menjalankan perintah dengan hak akses pengguna lain, biasanya sebagai pengguna root. Nama sudo berasal dari singkatan "superuser do." Perintah ini memberikan kemampuan kepada pengguna untuk menjalankan perintah yang membutuhkan hak akses administratif tanpa harus masuk sebagai pengguna root.
+
+![image](https://github.com/user-attachments/assets/2be5718d-c780-4506-9589-98f0dbe84f30)
+
+### 11. `chmod`
+Perintah `chmod` digunakan untuk mengubah izin akses file atau direktori.
+
+```
+chmod numeric
+read (r)= 4
+write (w)= 2
+execute = 1
+
+```
+![image](https://github.com/user-attachments/assets/e9af4b5a-7a28-4bc4-97d6-7a3a187daf43)
+
+
+### 12. `chown`
+
+Perintah `chown` digunakan untuk mengubah pemilik file atau direktori.
+
+![image](https://github.com/user-attachments/assets/2fd0853d-50b4-4f77-97bf-650a5042611b)
+
+### 13. `ip route`
+
+Perintah `ip route` digunakan untuk menampilkan dan mengkonfigurasi tabel routing IP di sistem Linux.
+IP route juga bisa digunakan untuk menambah/menghapus rute jaringan
+
+### 14. `ip address`
+Perintah `ip address` digunakan untuk menampilkan dan mengkonfigurasi alamat IP pada interface jaringan di sistem Linux.
+
+### 15. `find`
+Perintah `find` di Linux digunakan untuk mencari file dan direktori dalam sistem file
+
+![image](https://github.com/user-attachments/assets/9dbf14a0-586f-4eb6-a97a-6b7f899c9004)
+
 
