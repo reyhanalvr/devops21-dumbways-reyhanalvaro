@@ -11,7 +11,7 @@ Berikut adalah beberapa perintah Linux yang saya ketahui :
 ### 1. `ls`
 Perintah `ls` atau list digunakan untuk menampilkan daftar file dan direktori dalam direktori saat ini.
 
-ls -l
+ls -l \n
 ls -a
 
 ![image](https://github.com/user-attachments/assets/caf57fa0-0943-41b6-9b4f-94e6c0b29945)
@@ -45,7 +45,9 @@ perintah `rm` atau remove digunakan untuk menghapus file
 perintah `cp` atau copy digunakan untuk menyalin file/direktori 
 
 perintah cp juga bisa digunakan menyalin sekaligus mengganti nama file
+\n
 ![image](https://github.com/user-attachments/assets/0bc499d6-550e-4897-b600-add2ee6cd271)
+\n
 ![image](https://github.com/user-attachments/assets/8a5f2ee3-30a9-4e10-bb44-507f73b53ec6)
 
 ### 8. `mv`
