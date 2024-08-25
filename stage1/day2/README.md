@@ -103,6 +103,40 @@ Perintah `find` di Linux digunakan untuk mencari file dan direktori dalam sistem
 
 ![image](https://github.com/user-attachments/assets/9dbf14a0-586f-4eb6-a97a-6b7f899c9004)
 
+### 16. `nano`
+Perintah `nano` berfungsi untuk menampilkan file dalam teks editor nano, jikalau file belum ada maka nano akan membuatnya
+
+![image](https://github.com/user-attachments/assets/d7d09630-5f83-4575-aca2-b465b7d15a12)
+
+![image](https://github.com/user-attachments/assets/9dfabe2d-e212-47e3-ad3e-12f9d23371ad)
+
+### 17. `history`
+Perintah `history` untuk melihat riwayat perintah yang sudah kita gunakan sebelumnya. 
+
+![image](https://github.com/user-attachments/assets/cf136bba-c92a-4c5c-8741-823495e657f6)
+
+### 18. `echo`
+Perintah `echo` berfungsi untuk menambahkan suatu teks kedalam file
+
+```
+echo > untuk rewrite/menulis ulang isi dari file tersebut
+echo >> untuk append teks ke dalam file tanpa menghapus teks sebelumnya
+
+```
+![image](https://github.com/user-attachments/assets/288bb80d-8b6d-453d-aafe-85f3dabde9a8)
+
+### 19. `adduser`
+Perintah `adduser` berfungsi untuk menambahkan user baru pada sistem linux.
+
+![image](https://github.com/user-attachments/assets/4d97a525-2eb3-4f2d-8d8c-085d5aed406f)
+
+### 20. `sudo su`
+Perintah `sudo su` digunakan saat kita ingin meminta akses sebagai root, perintah ini juga bisa berfungsi untuk berpindah pada user lain di sistem kita.
+
+![image](https://github.com/user-attachments/assets/2c0af90b-55e9-4cb9-97dd-05fe54058c38)
+
+
+
 # 2. **Perbedaan antara IP Private & Public, serta IP Dynamic & Static**
 
 
