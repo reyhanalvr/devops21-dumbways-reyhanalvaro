@@ -5,7 +5,7 @@
    
 DevOps adalah penggabungan dari Development dan Operations untuk meningkatkan kolaborasi dan otomasi proses dari sebuah aplikasi
 
-DevOps melibatkan kolaborasi antara tim developer dan tim operation untuk mempercepat siklus pengembangan, testing, dan penerapan aplikasi. Dalam DevOps, otomatisasi adalah komponen penting, termasuk dalam hal pengujian, penerapan, dan monitoring, yang membantu memastikan bahwa perubahan pada perangkat lunak dapat dilakukan dengan cepat dan andal.
+DevOps melibatkan kolaborasi antara tim developer dan tim operation untuk mempercepat siklus pengembangan, testing, dan penerapan aplikasi. Dalam DevOps, otomatisasi adalah komponen penting, termasuk dalam hal testing, penerapan, dan monitoring, yang membantu memastikan bahwa perubahan pada aplikasi dapat dilakukan dengan cepat dan mengurangi human error.
 
 ### `DevOps Lifecycle`
 
