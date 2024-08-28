@@ -19,7 +19,7 @@ Task :
 
 ``` ^ = Ctrl | M = Alt ```
 
-## 1. Navigasi dan Editing
+## 1.1 Navigasi dan Editing
 - `Ctrl + A: Pindah ke awal baris`
 - `Ctrl + E: Pindah ke akhir baris`
 - `Ctrl + K: Cut teks dari posisi kursor awal ke akhir baris (atau keseluruhan baris jika kursor di awal baris)`
@@ -40,7 +40,7 @@ Task :
 
 ![image](https://github.com/user-attachments/assets/2fe94a16-7b64-4cd0-a889-d7a7da1e7de7)
 
-## 2. Save & Exit
+## 1.2 Save & Exit
 - `Ctrl + O: Menyimpan file tanpa harus keluar teks editor.`
 - `Ctrl + X: Menyimpan file dan keluar dari teks editor nano.`
 - `Ctrl + R: Masukkan konten dari file lain ke dalam file yang sedang dibuka | Ctrl + T: jika ingin melihat file apa saja dalam direktori kita` 
@@ -49,13 +49,13 @@ Task :
 
 ![image](https://github.com/user-attachments/assets/59b61deb-3ccb-4452-bfd1-5de891168da5)
 
-## 3. Help Shortcut
+## 1.3 Help Shortcut
 
 - `Ctrl + G: Menampilkan daftar halaman bantuan pada teks editor`
 
 ![image](https://github.com/user-attachments/assets/9b0f914a-28b8-4fa3-87f6-047940964c42)
 
-## 4. Undo & Redo
+## 1.4 Undo & Redo
 - `Ctrl + U: Batalkan perubahan (undo).`
 - `Ctrl + E: Ulangi perubahan yang dibatalkan (redo).`
 
