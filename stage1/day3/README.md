@@ -62,7 +62,7 @@ Task :
 
 # 2. Dokumentasi tentang Manipulation Text
 
-## 1.`cat`
+## 2.1 `cat`
 
 - `cat > <namafile> : untuk membuat file baru dan menginput teks | bisa juga untuk merewrite file yang sudah ada`
 
@@ -76,7 +76,7 @@ Task :
 
 ![image](https://github.com/user-attachments/assets/29a0fd3e-44f3-4641-b373-2cab075d8faa)
 
-## 2. `sed`
+## 2.2 `sed`
 
 - ` sed -i 's/kata/katapengganti/g' <namafile> ` -> /g disini global (global replacement) untuk secara spesifik mengganti string dalam kalimat
   
@@ -94,7 +94,7 @@ Task :
 
 ![image](https://github.com/user-attachments/assets/a9455659-caf4-45eb-a1d1-40fb18069881)
 
-## 3. 'awk'
+## 2.3 'awk'
 
 - ` awk '/pattern/ {print}' <filename> ` -> print output sesuai pattern yang diinput
 
@@ -107,7 +107,7 @@ Task :
 ![image](https://github.com/user-attachments/assets/c1ba9d07-3d3b-42c2-883d-f1f3a4eea243)
 
 
-## 4. 'grep'
+## 2.4 'grep'
 
 - `grep <kata> <namafile>`
 
@@ -121,5 +121,50 @@ Task :
 
 ![image](https://github.com/user-attachments/assets/1d1f2bea-8cc8-484c-b8b4-67762101c685)
 
+## 2.5 'sort'
+
+- `sort <namafile>` -> print output secara ascending
+
+![image](https://github.com/user-attachments/assets/7d380df7-6ef4-4696-8271-cc7c1a6ca689)
+
+- `sort <namafile> -r` -> print output secara descending
+
+![image](https://github.com/user-attachments/assets/9ea86a68-0f35-40ae-9bfc-e99f83fdc57a)
+
   
+# 3. Perbedaan Bash Scripting dan Shell Scripting
+
+`shell script` adalah sebuah skrip yang ditulis untuk dieksekusi oleh shell, yang merupakan command line interface user dalam sistem operasi Unix (seperti Linux). Shell di sini merujuk pada program yang menerima perintah dari pengguna dan menjalankannya.
+Biasanya ditandai dengan #!/bin/sh dan execute programnnya dengan command sh
+
+![image](https://github.com/user-attachments/assets/61d8fe6a-ce29-4ca3-ab98-640cece597cd)
+
+`bash script` adalah sejenis shell script yang secara khusus ditulis untuk dijalankan oleh Bash (Bourne Again Shell). Bash adalah salah satu shell yang paling banyak digunakan di sistem operasi Unix, termasuk distribusi Linux.
+Biasanya ditandai dengan #!/bin/bash dan execute programnnya dengan command bash
+
+![image](https://github.com/user-attachments/assets/066ac94f-0aa8-4c2d-8de7-2597d897411c)
+
+Bash script sering menggunakan fitur-fitur spesifik dari Bash yang mungkin tidak didukung oleh shell lain.
+- Fungsi dan array yang hanya ada di Bash.
+- Perluasan parameter dan penanganan job control yang lebih maju.
   
+![image](https://github.com/user-attachments/assets/849c862d-8c99-45b0-94c1-ac5be79ab799)
+
+`Scripting Operator`
+![image](https://github.com/user-attachments/assets/e9fc1ca6-3f2b-4336-8236-17fd2a213900)
+
+# 4. Membuat bash script untuk instalasi web server
+
+![image](https://github.com/user-attachments/assets/e3708806-b62f-4127-b16e-28da2391caba)
+
+## Penginstallan Nginx 
+
+![image](https://github.com/user-attachments/assets/ddcc36b9-8667-442b-8bf8-418bb7b78701)
+
+## Penginstallan Apache
+
+![image](https://github.com/user-attachments/assets/fcebad7f-5bb7-409f-9cc7-b57af0e772cc)
+
+# 5. 
+
+
