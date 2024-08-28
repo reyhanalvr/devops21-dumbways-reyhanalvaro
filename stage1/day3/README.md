@@ -1,4 +1,4 @@
-# Day 3
+![image](https://github.com/user-attachments/assets/41af667b-79cd-4a11-b9ae-b8da5de053f5)# Day 3
  
 ```
 Task :
@@ -62,6 +62,64 @@ Task :
 
 # 2. Dokumentasi tentang Manipulation Text
 
+## 1.`cat`
+
+- `cat > <namafile> : untuk membuat file baru dan menginput teks | bisa juga untuk merewrite file yang sudah ada`
+
+![image](https://github.com/user-attachments/assets/3655188f-45d5-4f47-8811-3b3da4ee9482)
+
+- `cat >> <namafile> : untuk append/menambahkan teks baru`
+
+![image](https://github.com/user-attachments/assets/df945375-310b-4a8b-9a5a-8eff83b8426d)
+
+- `cat <file1> <file2> > <file_baru> : untuk menggabungkan 2 file menjadi 1 file baru`
+
+![image](https://github.com/user-attachments/assets/29a0fd3e-44f3-4641-b373-2cab075d8faa)
+
+## 2. `sed`
+
+- ` sed -i 's/kata/katapengganti/g' <namafile> ` -> /g disini global (global replacement) untuk secara spesifik mengganti string dalam kalimat
+  
+![image](https://github.com/user-attachments/assets/7cedb3c8-e74c-4e47-8488-c4025731d056)
+
+- ` sed -i 's/kata/pengganti/1/2' <namafile>` -> /1 /2 disini untuk mengganti kata pada kalimat ke-n di setiap barisnya.
+
+![image](https://github.com/user-attachments/assets/47798537-9d6b-45a0-b1e0-c57be8ef5ce6)
+
+- `sed -i '/pattern/d' <namafile>` -> untuk menghapus kata pada file
+
+![image](https://github.com/user-attachments/assets/247cd4b4-d842-4434-96db-2572e40d11db)
+
+- ` 'sed -i '$a\Teks Baru' <namafile>' ` -> untuk menambahkan baris baru pada akhir file
+
+![image](https://github.com/user-attachments/assets/a9455659-caf4-45eb-a1d1-40fb18069881)
+
+## 3. 'awk'
+
+- ` awk '/pattern/ {print}' <filename> ` -> print output sesuai pattern yang diinput
+
+![image](https://github.com/user-attachments/assets/997f79b2-416c-42e6-b975-27d5b6add9e0)
+
+- ` awk '{print $n,$n}' <filename> ` > print output yang sudah disiplit sesuai n kedalam line baru
+
+![image](https://github.com/user-attachments/assets/32c7afb7-1e8d-4e45-ab7d-cded9899d52b)
+
+![image](https://github.com/user-attachments/assets/c1ba9d07-3d3b-42c2-883d-f1f3a4eea243)
 
 
+## 4. 'grep'
+
+- `grep <kata> <namafile>`
+
+![image](https://github.com/user-attachments/assets/d3774c60-5085-4918-8371-d6eff7612a93)
+
+- `grep -r(recursive) <kata>` -> mencari kata tetapi lupa direktorinya dimana
+
+![image](https://github.com/user-attachments/assets/13b88292-5bd6-4330-8a86-2911a12b4fbb)
+
+- `grep -rl <kata>` -> mencari file/direktori dengan kata
+
+![image](https://github.com/user-attachments/assets/1d1f2bea-8cc8-484c-b8b4-67762101c685)
+
+  
   
