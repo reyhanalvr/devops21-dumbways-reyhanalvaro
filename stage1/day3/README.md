@@ -165,6 +165,65 @@ Bash script sering menggunakan fitur-fitur spesifik dari Bash yang mungkin tidak
 
 ![image](https://github.com/user-attachments/assets/fcebad7f-5bb7-409f-9cc7-b57af0e772cc)
 
-# 5. 
+# 5. Implementasi Firewall pada linux server
+
+## Server A
+
+![image](https://github.com/user-attachments/assets/fe9778d8-c02b-4b61-8a1a-cd05197b2924)
+
+- Server A sudah bisa mengakses webserver server B
+  
+![image](https://github.com/user-attachments/assets/ce08e934-9fb8-46cf-930e-4edd13f48eff)
+
+
+## Server B
+
+![image](https://github.com/user-attachments/assets/5a00f3e1-685f-4a21-a8c5-1226b790df76)
+
+- Mengaktifkan firewall
+  
+![image](https://github.com/user-attachments/assets/6d7f35fd-b347-45a5-870b-58ded4df3bed)
+
+- Konfigurasi Firewall di Server B
+  
+![image](https://github.com/user-attachments/assets/5d056d41-4c73-4b64-b8c0-5874faa89052)
+
+- Pembuktian webserver sudah tidak bisa diakses selain dari server A setelah dikonfigurasi
+  
+![image](https://github.com/user-attachments/assets/f43965ed-5a0c-47f6-87eb-4aa28d9e4a2e)
+
+
+# TCP dan UDP
+
+`TCP (Transmission Control Protocol) dan UDP (User Datagram Protocol) adalah dua protokol utama dalam suite protokol TCP/IP yang digunakan untuk mengirim data melalui jaringan. Keduanya memiliki karakteristik yang berbeda dan digunakan untuk tujuan yang berbeda.`
+
+## Perbedaan TCP dan UDP
+
+### 1. Koneksi 
+
+- TCP merupakan protokol berbasis koneksi. Sebelum mengirim data, TCP melakukan proses yang disebut "three-way handshake" untuk membentuk koneksi yang dapat diandalkan antara pengirim dan penerima.
+- UDP merupakan protokol tanpa koneksi. UDP tidak melakukan proses handshake sehingga data langsung dikirim tanpa memerlukan koneksi dengan penerima
+
+### 2. Kecepatan
+- TCP lebih lambat karena overhead yang disebabkan oleh koneksi, pengurutan paket, dan pengiriman ulang paket yang hilang.
+- UDP lebih cepat karena tidak ada overhead untuk memastikan pengiriman yang andal. UDP sering digunakan untuk aplikasi yang memerlukan kecepatan tinggi dan bisa mentolerir kehilangan beberapa paket.
+
+### 3. Penggunaan
+- TCP digunakan dalam aplikasi yang membutuhkan keandalan dan pengurutan data, seperti web browsing (HTTP/HTTPS), email (SMTP), transfer file (FTP), dan sesi jarak jauh (SSH).
+- UDP digunakan dalam aplikasi yang membutuhkan kecepatan dan dapat mentoleransi sedikit kehilangan data, seperti streaming video/audio, gaming online, VoIP (Voice over IP), dan DNS (Domain Name System).
+
+### 4. Contoh Protokol dan Aplikasi
+- TCP: HTTP/HTTPS, FTP, SMTP, POP3, IMAP, SSH.
+- UDP: DNS, DHCP, TFTP, VoIP, online gaming, streaming media.
+
+![image](https://github.com/user-attachments/assets/318d6b47-6d5b-44ca-a39c-2d15ace1ebac)
+
+![image](https://github.com/user-attachments/assets/0820b564-3c07-4648-8e9f-26fc3496025b)
+
+
+## Implementasi Firewall untuk memblokir atau mengizinkan secara spesifik jaringan TCP dan UDP
+
+![image](https://github.com/user-attachments/assets/f352718c-4737-4752-9625-0e01390cfd25)
+
 
 
