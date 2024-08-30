@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/41af667b-79cd-4a11-b9ae-b8da5de053f5)# Day 3
+# Day 3
  
 ```
 Task :
