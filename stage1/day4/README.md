@@ -35,3 +35,74 @@ GIT adalah version control system terdistribusi yang digunakan untuk melacak per
 
 ## 3. Git Command
 
+### 3.1 `git init`
+
+Memulai repository Git baru di direktori saat ini. Ini membuat subdirektori .git yang menyimpan semua objek dan referensi yang dibutuhkan untuk versi kontrol.
+
+![image](https://github.com/user-attachments/assets/9fdb754a-de8c-474d-aa66-5b840af04cf3)
+
+### 3.2 `git add`
+
+Menambahkan semua perubahan file (baru, yang diubah, atau dihapus) ke staging area.
+
+![image](https://github.com/user-attachments/assets/59aae475-a9ff-4e9a-8639-eb364c31b76e)
+
+### 3.3 `git commit`
+
+Membuat commit dengan semua perubahan yang ada di staging area, dan menambahkan pesan commit yang menjelaskan perubahan tersebut.
+
+![image](https://github.com/user-attachments/assets/264ea088-dd0b-4db0-889b-481c3534b195)
+
+### 3.4 `git push`
+
+Mengirim commit yang ada di branch lokal main ke remote repository origin.
+
+![image](https://github.com/user-attachments/assets/a760e966-6c00-4f82-86d7-700161f40be6)
+
+### 3.5 `git status`
+
+Menampilkan status dari working directory dan staging area. Ini menunjukkan file mana yang diubah, ditambahkan, atau dihapus, serta file yang belum ditambahkan ke staging area.
+
+![image](https://github.com/user-attachments/assets/95ec8319-cfd2-4548-86a8-d1782cfa1d79)
+
+### 3.6 `git branch`
+
+Menampilkan semua branch yang ada di repository, termasuk yang ada di remote repository (-a menunjukkan semua branch, lokal dan remote).
+Command `git branch` bisa untuk membuat branch baru.
+
+![image](https://github.com/user-attachments/assets/cffd07f0-1f1b-4f79-9581-ade1ecb9db0c)
+
+![image](https://github.com/user-attachments/assets/64850ee9-15cf-45fa-9964-dec718e7d8ee)
+
+### 3.7 `git checkout`
+
+Beralih ke branch lain bernama feature-branch. Branch ini bisa merupakan branch yang sudah ada atau bisa juga digunakan untuk membuat branch baru (git checkout -b <branch_baru>).
+
+![image](https://github.com/user-attachments/assets/8dc569eb-0535-44eb-8878-219eae5148e3)
+
+### 3.8 `git merge` 
+
+Menggabungkan perubahan dari branch lain ke branch aktif saat ini. Ini sering digunakan untuk menggabungkan pekerjaan dari branch yang berbeda.
+
+![image](https://github.com/user-attachments/assets/db47914d-27a3-4b1f-be80-dd163bddd32c)
+
+### 3.9 `git log`
+
+`git log --oneline`
+
+Menampilkan riwayat commit dari repository. Ini menunjukkan daftar commit yang pernah dibuat, lengkap dengan hash, pesan commit, dan detail lainnya.
+
+![image](https://github.com/user-attachments/assets/1d13e6a9-0e98-481b-81bd-44e818303630)
+
+### 3.10 `git remote`
+
+Digunakan untuk mengelola dan menampilkan informasi tentang remote repository yang terhubung dengan repository lokal.
+ 
+![image](https://github.com/user-attachments/assets/9b9d15dc-276b-4aa4-9889-2f835b582098)
+
+### 3.11 `git pull`
+
+Mengambil perubahan terbaru dari remote repository dan langsung menggabungkannya dengan branch aktif lokal.
+
+![image](https://github.com/user-attachments/assets/d6502443-dcdc-41c4-ad09-89c761ea6f11)
+
