@@ -112,3 +112,34 @@ Mengambil perubahan terbaru dari remote repository dan langsung menggabungkannya
 
 ![image](https://github.com/user-attachments/assets/d6502443-dcdc-41c4-ad09-89c761ea6f11)
 
+## 4. Study Case
+
+Langkah yang harus dilakukan teguh :
+### 1. Teguh harus melakukan pull dengan command `git pull` dari remote repository ke repository localnya untuk menggabungkan code yang sudah dipush oleh Reyhan
+` git pull origin <nama_branch>`
+
+![image](https://github.com/user-attachments/assets/34be721d-6e2e-4749-8ea6-3ba67eae86d1)
+
+## 2. Mengatasi konflik, Teguh perlu membuka file index.html dan melihat teks konflik yang ditambahkan oleh Git
+
+```
+<<<<<<< HEAD 
+<p>Perubahan Teguh</p>
+=======
+<p>Perubahan Reyhan</p>
+>>>>>>> <perubahan_reyhan> 
+```
+
+Bagian di antara <<<<<<< HEAD dan ======= adalah perubahan yang dilakukan oleh Teguh, sementara bagian di antara ======= dan >>>>>>> <perubahan_reyhan> adalah perubahan yang dibuat oleh Reyhan. Setelah melihat perubahannya, Teguh bisa melakukan perubahan dan menambahkan perubahan dari Reyhan. Setelah melakukan perubahan, Teguh harus menyimpan filenya
+
+## 3. Melakukan Commit
+
+Setelah tidak ada konflik, Teguh perlu melakukan commit
+
+![image](https://github.com/user-attachments/assets/fbedbed9-4ccb-4b45-a557-b33abd2aaae2)
+
+## 4. Push file yang sudah di commit
+
+Setelah commit, Teguh dapat mencoba untuk melakukan push kembali
+
+![image](https://github.com/user-attachments/assets/e7420adc-4854-4de0-822e-105f8f02c0eb)
