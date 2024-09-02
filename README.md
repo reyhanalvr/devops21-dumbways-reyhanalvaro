@@ -12,3 +12,6 @@
 ---
 
 ## Week 2
+
+- Manage Server With Terminal
+- Version Control System
