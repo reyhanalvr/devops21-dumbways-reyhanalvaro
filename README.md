@@ -20,3 +20,4 @@
 
 ## Week 3
 - Application in Server
+- Web Server & Load Balance
