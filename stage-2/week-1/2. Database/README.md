@@ -65,19 +65,68 @@
 
 ## Give SELECT, INSERT, UPDATE, and DELETE access rights to the employees table for the admin role you just created. and only give SELECT access to guest.
 
-![image](https://github.com/user-attachments/assets/c341b161-7431-4c59-8f06-bc2e5761cefe)
+![image](https://github.com/user-attachments/assets/30aebf81-77d0-472f-b953-43c5b7c43639)
+
 
 ## Create a new user with the username your_name and password your_password. Add the user to the admin role.
 
-![image](https://github.com/user-attachments/assets/fdce744d-d4b3-471e-bdbc-5dae6708aa58)
+![image](https://github.com/user-attachments/assets/9972805e-65cb-4c4f-aa92-a41541e54f9b)
+
 
 ![image](https://github.com/user-attachments/assets/e3a38f4f-b62c-4d08-9e2c-170385876240)
+
+![image](https://github.com/user-attachments/assets/98d82a2c-2775-45ca-98cb-9941fedee372)
+
 
 
 ## Create a new user with the username guest and password guest. Add the user to the guest role.
 
-![image](https://github.com/user-attachments/assets/fdfaf923-f8cd-4cdc-a0b7-513adf0e46ad)
+![image](https://github.com/user-attachments/assets/25fd8f7e-820f-41fd-b311-64701b81c079)
 
 ![image](https://github.com/user-attachments/assets/79faa33f-91d3-4f54-a1eb-3c86554dd23a)
 
+![image](https://github.com/user-attachments/assets/38598efb-f68b-40c8-9038-65e54239eda2)
+
+
 ## Test all of your user
+
+### ADMIN
+
+- SELECT
+  
+![image](https://github.com/user-attachments/assets/6701ef91-ca74-400f-8f6c-890aa6ef009f)
+
+- INSERT
+  
+![image](https://github.com/user-attachments/assets/314f083a-cbba-4ea7-989e-269ed1e9023c)
+
+- UPDATE
+  
+![image](https://github.com/user-attachments/assets/8e55d089-c646-4db4-93ca-0faa7fbe0639)
+
+![image](https://github.com/user-attachments/assets/2c3df272-e4ce-4bcf-b02d-82806035c6ef)
+
+- DELETE
+  
+![image](https://github.com/user-attachments/assets/6e17abec-e08e-4eb1-9670-b37942095e89)
+
+
+### GUEST
+
+- SELECT
+![image](https://github.com/user-attachments/assets/8e8748d2-80fb-4f66-a165-7b8baf4719ac)
+
+- INSERT, UPDATE, DELETE
+![image](https://github.com/user-attachments/assets/3fde46b4-a9f1-40bc-ae31-988b12458385)
+
+![image](https://github.com/user-attachments/assets/706af27a-7084-46f0-86f3-7a3799f71c81)
+
+
+# 3. Remote User
+
+Saya mengakses database dari serverapp di local saya
+
+![image](https://github.com/user-attachments/assets/854b4249-fee5-4f0c-8aa7-5b441cf68924)
+
+![image](https://github.com/user-attachments/assets/6486785f-21a6-4594-89b4-6b22625d8f3d)
+
