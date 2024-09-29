@@ -138,7 +138,7 @@ Periksa apakah docker sudah terinstall dalam server
 
 ![image](https://github.com/user-attachments/assets/1ab60898-ce16-4cef-9e98-ebb078f0cacb)
 
-4. ## Deploy Frontend, Backend, Webserver, Database On Top Docker
+## 4. Deploy Frontend, Backend, Webserver, Database On Top Docker
 
 - Git clone repository frontend dan backend
 ```
@@ -169,7 +169,14 @@ git clone https://github.com/dumbwaysdev/wayshub-backend.git
 
 ![image](https://github.com/user-attachments/assets/d41cdf4f-3b2d-4e3c-b71f-cd6b249c3298)
 
-### Setup Database dan Backend terlebih dahulu
+# Setup Database dan Backend
+
+### Buat volumes untuk mysql
+
+![image](https://github.com/user-attachments/assets/7cb1a844-dbad-476d-bc5d-e9c48cae1f88)
+
+### Buat docker-compose.yml untuk BE dan DB 
+
   ```dockerfile
 services:
   db:
@@ -225,5 +232,107 @@ services:
 
 ![image](https://github.com/user-attachments/assets/ba70a489-6d4c-4572-99a4-f42f84e2418e)
 
-  
+
+# Setup Frontend dan Nginx 
+
+### Buat Dockerfile untuk Frontend
+
+![image](https://github.com/user-attachments/assets/2f314bad-5cbe-48ff-a066-f8bad357a627)
+
+### Build Image Frontend
+
+  ```
+  # Membuat image docker
+  docker build -t team2/literature/frontend:staging .
+  ```
+![image](https://github.com/user-attachments/assets/c459b185-600f-490b-8940-fe39fe9d091f)
+
+### Buat direktori nginx untuk volume
+
+![image](https://github.com/user-attachments/assets/a2577ef5-9415-4fdf-bb08-b6437c3e6b55)
+
+Lalu buat reverse proxy untuk aplikasi kita dengan domain yang sudah dibuat di cloudflare 
+
+![image](https://github.com/user-attachments/assets/9ed48b2e-90a5-40ea-93f6-2ff28bac5de7)
+
+### Setelah melakukan setup awal, tambahkan config ke docker-compose.yml tadi
+
+```dockerfile
+  frontend:
+    build: ./literature-frontend
+    container_name: frontend_staging
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+      - db
+    networks:
+      - team2_network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_staging
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt/live/team2.staging.studentdumbways.my.id/fullchain.pem:/etc/nginx/ssl/fullchain.pem
+      - /etc/letsencrypt/live/team2.staging.studentdumbways.my.id/privkey.pem:/etc/nginx/ssl/privkey.pem
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - team2_network
+```
+
+### Jalankan docker compose
+
+```
+# Command untuk running compose file
+docker compose up -d
+
+# Command untuk melihat process status dari docker compose
+docker compose ps -a
+```
+
+![image](https://github.com/user-attachments/assets/18a4f67f-2457-48b4-919e-1cc7624a6e53)
+
+### Implementasi Wilcard SSL
+
+Untuk SSL certificate Wildcard saya menggunakan Certbot untuk generate satu kali SSL sertificate yang nantinya bisa di gunakan untuk semua SSL.
+
+```
+sudo snap install --classic certbot
+
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+sudo snap set certbot trust-plugin-with-root=ok
+
+sudo snap install certbot-dns-cloudflare
+
+```
+
+Setup Credential cloudflare terlebih dahulu dan simpan ke dalam file cloudflare.ini di lokasi /root/.secret/cloudflare.ini
+
+```bash
+dns_cloudflare_email = "emailname@gmail.com"
+dns_cloudflare_api_key = "Token isi Here"
+```
+
+```
+certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.secrets/cloudflare.ini -d team2.staging.studentdumbways.my.id -d *.team2.staging.studentdumbways.my.id --preferred-challenges dns-01
+```
+
+
+### Setelah itu cek apakah aplikasinya berjalan atau tidak
+
+![image](https://github.com/user-attachments/assets/a86703f4-5cf1-40c2-b5bd-e14a5b7d1f00)
+
+![image](https://github.com/user-attachments/assets/39d3d8f8-c1d5-48b7-b325-521d8bb2354b)
+
+![image](https://github.com/user-attachments/assets/563ec2b8-db7f-4b75-8b8e-36871bffaff4)
+
+![image](https://github.com/user-attachments/assets/c78e2f80-6b19-429e-b131-ec8f08aa0da4)
 
