@@ -261,7 +261,7 @@ sudo snap install certbot-dns-cloudflare
 
 ```
 
-Setup Credential cloudflare terlebih dahulu dan simpan ke dalam file cloudflare.ini di lokasi /root/.secret/cloudflare.ini
+### Setup Credential cloudflare terlebih dahulu dan simpan ke dalam file cloudflare.ini di lokasi /root/.secret/cloudflare.ini
 
 ```bash
 dns_cloudflare_email = "emailname@gmail.com"
@@ -271,6 +271,10 @@ dns_cloudflare_api_key = "Token isi Here"
 ```
 certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.secrets/cloudflare.ini -d team2.staging.studentdumbways.my.id -d *.team2.staging.studentdumbways.my.id --preferred-challenges dns-01
 ```
+
+Perbarui file reverse proxy dan masukan certificate yang di generate tadi
+
+![image](https://github.com/user-attachments/assets/19381b6d-8f35-4f8c-8fcb-8cfc58b5877f)
 
 
 ### Setelah itu cek apakah aplikasinya berjalan atau tidak
