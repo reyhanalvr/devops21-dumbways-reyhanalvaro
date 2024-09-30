@@ -32,23 +32,27 @@ Buat job notification ke discord
 ```bash
 variables:
   IMAGE : team2/literature/frontend
-  TAG : test
+  TAG : latest
   SSH_USER: team2-fe
-  SSH_HOST: 35.198.212.132
+  SSH_HOST: 34.143.209.44
   DIR : /home/team2-fe/apps/literature-frontend
   PORT: 3010
   CONTAINER_NAME : fe-production
   DOCKER_USERNAME: reyhanalvr
   DOCKER_PASSWORD: $DOCKER_PASSWORD
   DOCKER_REGISTRY: reyhanalvr/team2-literature-frontend
+  COMPOSE: docker-compose.yml
+  DISCORD_WEBHOOK: "https://discord.com/api/webhooks/1288737919577886743/C--62xLZbiYwpUdejmN8AL7PHxjNnp-X6ba4ThljF_sFji4qTWOMbomSHHrT-MOrC21s"
 
-# Define the available stages
+
 stages:
   - pull
   - build
   - test
   - push
   - deploy
+  - notify-failure
+  - notify-success
 
 .setup_ssh: &setup_ssh
   before_script:
@@ -66,10 +70,10 @@ pull:
   image: docker
   <<: *setup_ssh
   script:
-    - echo "Pulling latest code from Git"
-    - ssh $SSH_USER@$SSH_HOST "cd $DIR && git pull origin production"
+    - echo "Pulling the latest code from Git"
+    - ssh $SSH_USER@$SSH_HOST "cd $DIR && git checkout production && git pull origin production"
   after_script:
-    - echo "Git pull success"
+    - echo "Git pull successful"
 
 # Docker Build Stage
 build:
@@ -80,7 +84,7 @@ build:
     - echo "Building Docker image"
     - ssh $SSH_USER@$SSH_HOST "cd $DIR && docker build -t $IMAGE:$TAG ."
   after_script:
-    - echo "Docker build success"
+    - echo "Docker build successful"
 
 # Docker Test Stage
 test:
@@ -88,25 +92,26 @@ test:
   image: docker
   <<: *setup_ssh
   script:
-    - echo "Running Docker container"
-    - ssh $SSH_USER@$SSH_HOST "docker run -it -p $PORT:3000 -d --name $CONTAINER_NAME $IMAGE:production"
-    - echo "Testing if the website is up"
-    - ssh $SSH_USER@$SSH_HOST "if wget -q --spider http://localhost:$PORT; then echo 'Website up'; else echo 'Website down'; fi"
+  - echo "Delete running container"
+  - ssh $SSH_USER@$SSH_HOST "docker rm -f $CONTAINER_NAME"
+  - echo "Running Docker container for testing"
+  - ssh $SSH_USER@$SSH_HOST "docker run --rm -d -p $PORT:80 --name $CONTAINER_NAME $IMAGE:$TAG && wget -q --spider http://localhost:$PORT && echo 'Website  is up' || echo 'Website is down'"
   after_script:
-    - echo "Docker run and test success"
+    - echo "Docker run and test completed successfully"
 
+
+# Docker Push Stage
 push:
-   stage: push
-   image: docker
-   services:
-     - docker:dind
-   script:
-  - ssh $SSH_USER@$SSH_HOST "cd $DIR"
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - ssh $SSH_USER@$SSH_HOST "cd $DIR && docker push $DOCKER_REGISTRY:$TAG"
-  - ssh $SSH_USER@$SSH_HOST "exit"
-  - echo "Push Image to Docker Hub Successfully!"
-
+  stage: push
+  image: docker
+  <<: *setup_ssh
+  script:
+    - echo "Tagging Docker image on remote server"
+    - ssh $SSH_USER@$SSH_HOST "docker tag $IMAGE:$TAG reyhanalvr/team2-literature-frontend:production"
+    - echo "Pushing Docker image to Docker Hub from remote server"
+    - ssh $SSH_USER@$SSH_HOST "docker push reyhanalvr/team2-literature-frontend:production"
+  after_script:
+    - echo "Docker image pushed to Docker Hub successfully"
 
 # Deployment Stage
 deploy:
@@ -115,10 +120,24 @@ deploy:
   <<: *setup_ssh
   script:
     - echo "Deploying application"
-    - ssh $SSH_USER@$SSH_HOST "docker compose -f $COMPOSE down" 
-    - ssh $SSH_USER@$SSH_HOST "docker compose -f $COMPOSE up -d"
+    - ssh $SSH_USER@$SSH_HOST "cd $DIR && docker-compose -f $COMPOSE down"
+    - ssh $SSH_USER@$SSH_HOST "cd $DIR && docker compose pull"
+    - ssh $SSH_USER@$SSH_HOST "cd $DIR && docker-compose -f $COMPOSE up -d"
   after_script:
-    - echo "Deploy success"
+    - echo "Deployment successful"
+
+notify-success:
+    stage: notify-success
+    when: on_success
+    script:
+        - wget https://raw.githubusercontent.com/NurdTurd/gitlab-ci-discord-webhook/master/send.sh
+        - bash ./send.sh success $DISCORD_WEBHOOK
+notify-failure:
+    stage: notify-failure
+    when: on_failure
+    script:
+        - wget https://raw.githubusercontent.com/NurdTurd/gitlab-ci-discord-webhook/master/send.sh
+        - bash ./send.sh failure $DISCORD_WEBHOOK
 ```
 
 ### Setiap ada perubahan code maka akan langsung ke auto trigger kalau di gitlab CI/CD dan langsung akan menjalankan pipeline
