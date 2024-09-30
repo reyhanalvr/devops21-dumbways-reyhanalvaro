@@ -51,8 +51,7 @@ stages:
   - test
   - push
   - deploy
-  - notify-failure
-  - notify-success
+  - notification
 
 .setup_ssh: &setup_ssh
   before_script:
@@ -126,18 +125,20 @@ deploy:
   after_script:
     - echo "Deployment successful"
 
-notify-success:
-    stage: notify-success
-    when: on_success
-    script:
-        - wget https://raw.githubusercontent.com/NurdTurd/gitlab-ci-discord-webhook/master/send.sh
-        - bash ./send.sh success $DISCORD_WEBHOOK
-notify-failure:
-    stage: notify-failure
-    when: on_failure
-    script:
-        - wget https://raw.githubusercontent.com/NurdTurd/gitlab-ci-discord-webhook/master/send.sh
-        - bash ./send.sh failure $DISCORD_WEBHOOK
+success_notification:
+  stage: notification
+  script:
+    - wget https://raw.githubusercontent.com/DiscordHooks/gitlab-ci-discord-webhook/master/send.sh
+    - chmod +x send.sh
+    - ./send.sh success $DISCORD_WEBHOOK
+  when: on_success
+failure_notification:
+  stage: notification
+  script:
+    - wget https://raw.githubusercontent.com/DiscordHooks/gitlab-ci-discord-webhook/master/send.sh
+    - chmod +x send.sh
+    - ./send.sh failure $DISCORD_WEBHOOK
+  when: on_failure
 ```
 
 ### Setiap ada perubahan code maka akan langsung ke auto trigger kalau di gitlab CI/CD dan langsung akan menjalankan pipeline
