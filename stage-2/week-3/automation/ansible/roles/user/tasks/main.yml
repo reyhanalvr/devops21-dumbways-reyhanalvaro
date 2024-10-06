@@ -1,0 +1,65 @@
+---
+# tasks file for roles/user
+
+- name: Install acl package
+  apt:
+    name: acl
+    state: present
+
+- name: Create user
+  user:
+    name: "{{ user_name }}"
+    state: present
+    home: "/home/{{ user_name }}"
+    shell: /bin/bash
+    create_home: yes
+
+- name: Add user to sudo group
+  user:
+    name: "{{ user_name }}"
+    groups: sudo
+    append: yes 
+
+- name: Add user to docker group
+  user:
+    name: "{{ user_name }}"
+    groups: docker
+    append: yes
+
+- name: Set user password
+  user:
+    name: "{{ user_name }}"
+    password: "{{ user_password | password_hash('sha512') }}"
+  # no_log: true
+
+- name: Set user home directory permissions
+  file:
+    path: "/home/{{ user_name }}"
+    mode: '0755'
+
+- name: Set user shell
+  shell: chsh -s /bin/bash {{ user_name }}
+  environment:
+    HOME: "/home/{{ user_name }}"
+
+- name: Add SSH public key
+  authorized_key:
+    user: "{{ user_name }}"
+    key: "{{ ssh_public_key }}"
+    state: present
+    path: "/home/{{ user_name }}/.ssh/authorized_keys"
+
+- name: Ensure .ssh directory exists
+  file:
+    path: "/home/{{ user_name }}/.ssh"
+    state: directory
+    mode: '0700'
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+
+- name: Set permissions for authorized_keys
+  file:
+    path: "/home/{{ user_name }}/.ssh/authorized_keys"
+    mode: '0600'
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"

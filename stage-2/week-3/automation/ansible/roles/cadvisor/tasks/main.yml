@@ -1,0 +1,17 @@
+---
+# tasks file for roles/cadvisor
+
+    - name: Run cAdvisor container
+      docker_container:
+        name: cadvisor
+        image: zcube/cadvisor:latest
+        state: started
+        volumes:
+          - "/:/rootfs:ro"
+          - "/var/run:/var/run:ro"
+          - "/sys:/sys:ro"
+          - "/var/lib/docker/:/var/lib/docker:ro"
+          - "/dev/disk/:/dev/disk:ro"
+        published_ports:
+          - "8080:8080"
+        detach: true

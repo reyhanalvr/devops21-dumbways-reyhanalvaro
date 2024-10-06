@@ -1,0 +1,8 @@
+- name: Reverse Proxy and Generate SSL Certificate on Webserver
+  hosts: webserver
+  become: yes
+  roles:
+    - docker
+    - reverse_proxy
+    - certbot
+

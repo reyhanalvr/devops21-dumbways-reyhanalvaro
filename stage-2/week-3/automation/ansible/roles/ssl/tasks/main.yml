@@ -1,0 +1,55 @@
+    - name: Stop Nginx for Certbot
+      docker_container:
+        name: nginx
+        state: stopped
+
+    - name: Create Cloudflare credentials file
+      copy:
+        dest: /srv/nginx/cloudflare.ini
+        content: |
+          dns_cloudflare_api_token = {{dns_cloudflare_api_token}}
+        mode: '0600'    
+
+    - name: Check if SSL certificate exists
+      stat:
+        path: /etc/letsencrypt/live/alvaro.studentdumbways.my.id/fullchain.pem
+      register: cert_status
+
+    - name: Obtain wildcard SSL certificates using Certbot
+      command: >
+        certbot certonly --dns-cloudflare --dns-cloudflare-credentials /srv/nginx/cloudflare.ini
+        -d *.alvaro.studentdumbways.my.id 
+        --email ryhnalvr99@gmail.com 
+        --agree-tos
+      when: not cert_status.stat.exists
+
+    - name: Update Nginx reverse proxy config with SSL for monitoring
+      template:
+        src: reverse_proxy_certbot.conf.j2
+        dest: /srv/nginx/conf.d/multi_domain_proxy.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Update Nginx reverse proxy config with SSL for frontend
+      template:
+        src: reverse_proxy_certbot_fe.conf.j2
+        dest: /srv/nginx/conf.d/frontend.conf
+        owner: root
+        group: root
+        mode: '0644'  
+        
+    - name: Run Nginx container
+      docker_container:
+        name: nginx
+        image: nginx:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"
+          - "443:443"
+        volumes:
+          - /srv/nginx/conf.d:/etc/nginx/conf.d
+          - /srv/nginx/logs:/var/log/nginx
+          - /etc/letsencrypt/live/alvaro.studentdumbways.my.id/fullchain.pem:/etc/nginx/ssl/fullchain.pem
+          - /etc/letsencrypt/live/alvaro.studentdumbways.my.id/privkey.pem:/etc/nginx/ssl/privkey.pem

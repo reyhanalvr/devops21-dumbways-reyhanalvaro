@@ -1,0 +1,14 @@
+---
+# - hosts: all
+#   remote_user: "{{ user_name }}"
+#   gather_facts: no
+#   roles:
+#     - user
+#   tasks:
+#     - name: Run a test command
+#       shell: curl http://localhost:8080
+#       register: result
+
+#     - name: Debug output
+#       debug:
+#         var: result.stdout

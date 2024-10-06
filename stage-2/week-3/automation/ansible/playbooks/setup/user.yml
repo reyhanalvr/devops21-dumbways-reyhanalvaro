@@ -1,0 +1,6 @@
+---
+- name: Add user
+  hosts: all
+  become: yes
+  roles:
+    - user

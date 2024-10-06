@@ -1,0 +1,25 @@
+---
+# tasks file for roles/frontend
+
+- name: Pull the latest image
+  docker_image:
+    name: "{{ frontend_image }}"
+    source: pull
+
+- name: Deploy frontend app on top docker
+  docker_container:
+    name: frontend
+    image: "{{ frontend_image }}"
+    state: started
+    published_ports:
+      - "{{ frontend_port }}:80"
+    restart_policy: always  
+
+- name: Run a test command
+  shell: curl http://localhost:{{ frontend_port }}
+  register: result
+
+- name: Debug output
+  debug:
+    var: result.stdout
+

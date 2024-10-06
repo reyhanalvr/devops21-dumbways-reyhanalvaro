@@ -1,0 +1,22 @@
+   # Terraform files
+   /terraform/aws/.terraform/
+   /terraform/.terraform/
+   /terraform/*.lock.hcl
+   /terraform/*.tfstate
+   /terraform/*.tfstate.*
+   /terraform/*.tfplan
+   /terraform/*.tfplan.*
+   /terraform/*.tfvars
+   /terraform/crash.log
+   /terraform/secrets.tfvars
+
+   # Ansible files (if needed)
+    /ansible/roles/*/vars/*
+    /ansible/*.retry
+    /ansible/*.vault
+    /ansible/.vscode/
+    /ansible/.idea/
+    /ansible/group_vars/*
+
+    .terraform
+    .vscode

@@ -1,0 +1,5 @@
+- name: Deploy Nginx on Top Docker
+  hosts: all
+  become: yes
+  roles:
+    - nginx

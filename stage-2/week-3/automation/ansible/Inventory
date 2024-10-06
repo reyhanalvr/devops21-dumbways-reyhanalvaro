@@ -1,0 +1,25 @@
+[all]
+server1 ansible_host=13.250.0.217 ansible_user=ubuntu
+server2 ansible_host=13.251.32.98 ansible_user=admin
+server3 ansible_host=103.127.136.47 ansible_user=alvaro
+monitoring_server ansible_host=103.196.153.95 ansible_user=alvaro
+
+[AWS]
+# 13.250.0.217 ansible_user=ubuntu
+# 13.251.32.98 ansible_user=admin
+server1 
+server2 
+
+[biznet]
+# 103.127.136.47 ansible_user=alvaro
+# 103.196.153.95 ansible_user=alvaro
+server3 
+monitoring_server 
+
+[gateway]
+server1
+server2
+server3
+
+[monitoring]
+monitoring_server

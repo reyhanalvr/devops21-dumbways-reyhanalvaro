@@ -1,0 +1,34 @@
+user_name: alvaro
+frontend_image: reyhanalvr/team2-literature-frontend:production
+
+
+#Domain Monitoring
+node_domain1: exporter1.alvaro.studentdumbways.my.id
+node_domain2: exporter2.alvaro.studentdumbways.my.id 
+node_domain3: exporter3.alvaro.studentdumbways.my.id
+
+node_domain4: exporter4.alvaro.studentdumbways.my.id
+prometheus_domain: prometheus.alvaro.studentdumbways.my.id
+grafana_domain: monitoring.alvaro.studentdumbways.my.id
+
+#Domain Frontend
+frontend_aws1:  frontend1.alvaro.studentdumbways.my.id
+frontend_aws2: frontend2.alvaro.studentdumbways.my.id
+frontend_biznet1: frontend3.alvaro.studentdumbways.my.id
+frontend_biznet2: frontend4.alvaro.studentdumbways.my.id
+
+#Path
+ssl_cert_path: /etc/letsencrypt/live/alvaro.studentdumbways.my.id
+
+#Host
+monitoring_server: 103.196.153.95
+server1: 13.250.0.217
+server2: 13.251.32.98
+server3: 103.127.136.47
+
+#Port
+node_port: 9100
+prometheus_port: 9090
+grafana_port: 3000
+frontend_port: 3010
+cadvisor_port: 8080

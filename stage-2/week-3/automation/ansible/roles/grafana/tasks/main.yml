@@ -1,0 +1,49 @@
+    - name: Ensure the user directory exists
+      file:
+        path: /home/{{ user_name }}/monitoring/grafana
+        state: directory
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: '0755'
+
+    - name: Create Docker network 'monitoring' (ignore if already exists)
+      command: docker network create monitoring
+      ignore_errors: yes
+      
+    - name: Create docker-compose.yml for Grafana
+      copy:
+        content: |
+          services:
+            grafana:
+              image: grafana/grafana
+              container_name: grafana
+              user: "${UID}:${GID}"
+              restart: unless-stopped
+              ports:
+                - '3000:3000'
+              environment:
+                - GF_SERVER_ROOT_URL=http://{{ grafana_domain }}
+              volumes:
+                - ./grafana-storage:/var/lib/grafana
+              networks:
+                - monitoring
+          networks:
+            monitoring:
+              external: true
+              
+          volumes:
+            grafana-storage: {}
+
+        dest: /home/{{ user_name }}/monitoring/grafana/docker-compose.yml
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
+        mode: '0644'
+
+    - name: Remove existing grafana container if it exists
+      command: docker rm -f grafana
+      ignore_errors: yes
+
+    - name: Run Docker Compose to start Grafana
+      shell: docker compose down grafana && docker compose up -d
+      args:
+        chdir: /home/{{ user_name }}/monitoring/grafana

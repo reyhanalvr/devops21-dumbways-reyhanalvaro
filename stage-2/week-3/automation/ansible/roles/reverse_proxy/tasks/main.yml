@@ -1,0 +1,34 @@
+
+    - name: Create directory for Nginx config
+      file:
+        path: /srv/nginx/conf.d
+        state: directory
+        mode: '0755'
+
+    - name: Create directory for Nginx logs
+      file:
+        path: /srv/nginx/logs
+        state: directory
+        mode: '0755'
+
+    - name: Create Nginx reverse proxy config
+      template:
+        src: reverse_proxy.conf.j2
+        dest: /srv/nginx/conf.d/multi_domain_proxy.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Run Nginx container
+      docker_container:
+        name: nginx
+        image: nginx:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"
+          - "443:443"
+        volumes:
+          - /srv/nginx/conf.d:/etc/nginx/conf.d
+          - /srv/nginx/logs:/var/log/nginx
+

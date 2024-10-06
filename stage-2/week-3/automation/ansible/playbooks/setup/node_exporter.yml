@@ -1,0 +1,5 @@
+- name: Install Node Exporter as user alvaro
+  hosts: all
+  become: yes
+  roles:
+    - node_exporter

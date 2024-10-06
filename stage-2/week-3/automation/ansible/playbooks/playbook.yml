@@ -1,0 +1,42 @@
+- name: Playbook Setup 'all-server'
+  hosts: all
+  become: true
+  roles:
+    # - user
+    # - docker
+    # - frontend  
+    # - node_exporter 
+    # - prometheus 
+    # - grafana 
+    # - nginx 
+    # - reverse_proxy 
+    # - ssl
+      - cadvisor
+  tags: all-server
+
+#Webserver Nginx and Monitoring
+- name: Playbook Setup 'monitoring-server
+  hosts: monitoring
+  become: true
+  roles:
+      # - user  
+      # - docker
+      # - node_exporter  
+      # - prometheus 
+      - grafana  
+      # - nginx  
+      # - reverse_proxy  
+      # - ssl 
+  tags: monitoring
+
+
+#Gateway Server (Frontend)
+- name: Playbook Setup 'gateway-server
+  hosts: gateway
+  become: true
+  roles:
+    # - user
+    # - docker  
+    - frontend  
+    - node_exporter
+  tags: gateway
