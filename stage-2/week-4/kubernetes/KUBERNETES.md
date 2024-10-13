@@ -265,6 +265,21 @@ spec:
 
 ## Buat wildcard certificate ssl dengan bantuan cert-manager
 
+### Install Cert-manager Dengan Helm
+
+```
+helm repo add jetstack https://charts.jetstack.io
+
+helm repo update
+
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.9.1 \
+  --set installCRDs=true
+```
+
 - Buat secret untuk menampung dns cloudflare api token kita
 
 ```
