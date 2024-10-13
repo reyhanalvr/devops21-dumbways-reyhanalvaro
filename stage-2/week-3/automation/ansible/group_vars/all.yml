@@ -21,10 +21,10 @@ frontend_biznet2: frontend4.alvaro.studentdumbways.my.id
 ssl_cert_path: /etc/letsencrypt/live/alvaro.studentdumbways.my.id
 
 #Host
-monitoring_server: 103.196.153.95
-server1: 13.250.0.217
-server2: 13.251.32.98
-server3: 103.127.136.47
+monitoring_server: 
+server1: 
+server2:
+server3:
 
 #Port
 node_port: 9100
