@@ -17,6 +17,12 @@ be : api.name.kubernetes.studentdumbways.my.id
 
 ![image](https://github.com/user-attachments/assets/92d795aa-f260-41be-9d17-84a6b43c38c3)
 
+![image](https://github.com/user-attachments/assets/730a293a-fb23-4a43-834e-4bee5f6037ea)
+
+![image](https://github.com/user-attachments/assets/cd61439f-5741-4c1a-bf94-9e052c9462b8)
+
+
+
 ## Buat kubernetes cluster
 
 Untuk membuat cluster K3s kita wajib lihat dokumentasi resmi dari k3s untuk instalasi master node terlebih dahulu, setelah master node dibuat tinggal kita lakukan join saja untuk para worker node nya dengan menggunakan ip address dari master dan juga token khusus dari master node.
