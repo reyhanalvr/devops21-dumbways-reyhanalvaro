@@ -1,0 +1,217 @@
+```
+Requirements
+
+Deployments on top Docker
+Instructions
+
+Create Basic Auth into your Prometheus
+  Monitor resources for all your servers
+  Create a fully working dashboard in Grafana
+  Disk
+  Memory Usage
+  CPU Usage
+  VM Network
+  Monitoring all of container resources on VM
+
+Grafana Alert/Prometheus Alertmanager for:
+  Send Notification to Telegram
+  CPU Usage
+  RAM Usage
+  Free Storage
+  Network I/O (NGINX Monitoring)
+
+```
+
+# Kubernetes Cluster Monitoring
+
+## Instalasi Prometheus-Community dengan helm
+
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+```
+
+![image](https://github.com/user-attachments/assets/68c5405f-7d25-4bc6-bee8-125b636d577d)
+
+- Installasi repository dari kube-pormetheus-stack karena sudah termasuk tools monitoring seperti grafana, cadvisor, prometheus dll.
+
+```
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace
+```
+
+![image](https://github.com/user-attachments/assets/6e61587c-f7d8-4021-bfba-e246bacf30a3)
+
+- Setelah Install seleai buat ingress agar Monitoring bisa di akses external dan juga domain yang sudah diinstall SSL.
+- Untuk Ingress sendiri cukup Grafana karena masih dalam 1 cluster jadi semua bisa terhubung.
+
+![image](https://github.com/user-attachments/assets/03af0506-23b9-44a4-9b39-c9b50a9e1082)
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "grafana.alvaro.studentdumbways.my.id"
+      secretName: wildcard-tls-secret
+  rules:
+  - host: grafana.alvaro.studentdumbways.my.id
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kube-prometheus-stack-grafana
+            port:
+              number: 80
+```
+
+- Masuk ke grafana dashboard dan login
+  Untuk passwordnya sendiri bisa kita dapatkan di
+  ```
+  kubectl get secret kube-prometheus-stack-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+  ```
+
+![image](https://github.com/user-attachments/assets/e480ba71-5cf2-4743-a6b7-7a9f537c77ad)
+
+Untuk dashboard sendiri saya memakai https://grafana.com/grafana/dashboards/18283-kubernetes-dashboard/
+
+### Dashboard
+
+![image](https://github.com/user-attachments/assets/eb3bf6f3-d1a1-4e74-9809-7b6a7ad40e0f)
+
+---
+
+# Monitoring VM dengan Docker Compose
+
+### Instalasi NodeExporter, cAdvisor, Prometheus, dan Grafana dengan bantuan Ansible
+
+![image](https://github.com/user-attachments/assets/ba19d1cd-8ea0-4644-bb83-0ac5a59444ea)
+
+![image](https://github.com/user-attachments/assets/80c26d81-3007-46be-9968-bcdacd8eaf0a)
+
+### Konfigurasi Prometheus.yaml
+
+```yaml
+global:
+  scrape_interval: 30s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'all-server'
+    static_configs:
+      - targets:
+
+
+  - job_name: 'staging'
+    static_configs:
+      - targets:
+
+  - job_name: 'production'
+    static_configs:
+      - targets:
+
+  - job_name: 'docker-registry'
+    static_configs:
+      - targets:
+
+  - job_name: 'monitoring'
+    static_configs:
+      - targets:
+
+  - job_name: 'jenkins'
+    static_configs:
+      - targets:
+
+  - job_name: 'webserver'
+    static_configs:
+      - targets:
+        - "103.127.136.47:9100"
+
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets:
+
+```
+
+### Tambahkan Basic Auth untuk Prometheus
+
+![image](https://github.com/user-attachments/assets/bd516c42-5cdf-46a7-a211-8e067be611c9)
+
+![image](https://github.com/user-attachments/assets/3c506733-7df3-4815-8d34-f9485d39a429)
+
+### Prometheus sudah terdeploy
+
+![image](https://github.com/user-attachments/assets/c1b9e869-1110-45b8-bbcb-df6e0a04af03)
+
+### Buat Datasources di Grafana
+
+![image](https://github.com/user-attachments/assets/01ba3343-ae08-4416-ac78-aa2af9e701d1)
+
+### Dashboard 
+
+![image](https://github.com/user-attachments/assets/26a1b9d9-0a99-483e-9779-59a6a28a6817)
+
+### PromQL
+
+- Memory Usage
+  - Query ini menghitung persentase penggunaan memori pada setiap instance. Dengan mengurangi memori yang tersedia (MemAvailable) terhadap total memori (MemTotal), query ini menunjukkan berapa banyak memori yang telah digunakan.
+```
+100 * (1 - avg by(instance)(node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes))
+```
+
+- CPU Usage
+  - Query ini menghitung persentase penggunaan CPU dengan mengurangi waktu yang dihabiskan CPU dalam mode "idle" selama 5 menit terakhir dari total waktu. Hasilnya adalah persentase waktu CPU yang digunakan untuk pemrosesan aktif.
+```
+round(100-(avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100), 0.01)
+```
+
+- Disk Usage
+  - Query ini menghitung persentase penggunaan disk dengan membandingkan kapasitas yang tersedia (filesystem_avail_bytes) terhadap total ukuran filesystem (filesystem_size_bytes). Hasilnya adalah persentase disk yang digunakan pada filesystem mountpoint "/".
+```
+100 - (avg by(instance) (
+    (node_filesystem_avail_bytes{mountpoint="/", fstype!="rootfs"} * 100) 
+    / 
+    node_filesystem_size_bytes{mountpoint="/", fstype!="rootfs"}
+))
+
+```
+
+- Network I/O Nginx
+  - Query ini menghitung total lalu lintas jaringan (baik data yang diterima maupun dikirim) pada container webserver-nginx-1 selama 1 menit terakhir, dengan menggunakan rate untuk mengukur kecepatan transfer byte.
+```
+sum(rate(container_network_receive_bytes_total{name="webserver-nginx-1"}[1m])) + sum(rate(container_network_transmit_bytes_total{name="webserver-nginx-1"}[1m]))
+```
+
+# Telegram Alert
+
+### Buat Telegram Bot di BotFather
+
+![image](https://github.com/user-attachments/assets/02ed6764-6e74-462f-868c-4bf50b8ad189)
+
+### Dapatkan Chat ID di Get ID Bot
+
+![image](https://github.com/user-attachments/assets/a96cbf25-2ce0-4cbf-be96-78b080b8950c)
+
+### Buat Contact Point Telegram
+
+![image](https://github.com/user-attachments/assets/f65983d7-6941-4bbe-ab80-8fb8a1c6770d)
+
+### Buat Alert Rule
+
+![image](https://github.com/user-attachments/assets/eed75c6a-eb54-48e3-b89b-f9363f0f6a6d)
+
+### Hasil Notifikasi
+
+![image](https://github.com/user-attachments/assets/7d685a79-2797-4fe8-a895-773609a69c8f)
+
