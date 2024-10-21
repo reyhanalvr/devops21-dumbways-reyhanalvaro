@@ -1,0 +1,139 @@
+```
+Instruction
+Staging
+
+[ Database ]
+
+App database using PostgreSQL
+Deploy postgresql on top docker
+Set the volume location in /home/$USER/
+Allow database to remote from another server
+[ Application ]
+
+Create a Docker image for frontend & backend
+Staging & Production: A lightweight docker image (as small as possible)
+Building Docker image on every environment using docker multistage build
+Create load balancing for frontend and backend
+```
+
+# Staging
+
+` Baca README.md yang tertera untuk mengatur konfigurasi dalam setiap service seperti .env `
+
+## Database
+
+Database Setup menggunakan PostgreSQL on top docker
+
+Buat Volume PostgreSQL di /home/$USER/
+
+![image](https://github.com/user-attachments/assets/b10c43f2-0605-469e-a463-32446c486d82)
+
+Konfigurasi Docker Compose untuk PostgreSQL
+
+![image](https://github.com/user-attachments/assets/5d548c18-d134-407d-8f0b-f8dc320bf6a7)
+
+Untuk mengecheck apakah database kita sudah terdeploy dengan benar kita bisa masuk ke container database yang berjalan
+menggunakan `docker exec -it `
+
+![image](https://github.com/user-attachments/assets/2484445a-6734-437f-a5b1-be70bf0b7143)
+
+
+
+---
+
+## Backend
+
+Buat Dockerfile dengan multiple stage build untuk mendapat size ringan
+```Dockerfile
+FROM golang:1.19-alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY . .
+
+# Build the Go application statically linked
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /app/main .
+
+FROM alpine:latest
+
+WORKDIR /root/
+
+RUN apk --no-cache add bash
+
+COPY --from=builder /app/main .
+
+COPY .env .env
+
+EXPOSE 5000
+
+CMD ["./main"]
+```
+
+Size Docker Image
+![image](https://github.com/user-attachments/assets/ed47f7c8-06b7-4718-a7fb-5188dd6d3b95)
+
+Buat Konfigurasi Docker Compose Backend
+
+```yaml
+services:
+    backend:
+      image: registry.alvaro.studentdumbways.my.id/dumbmerch-be:v4
+      networks:
+        - apps_network
+      ports:
+        - "5000:5000"
+```
+
+Check apakah container sudah berjalan dan migrate berhasil
+
+![image](https://github.com/user-attachments/assets/2375b2c8-74b1-496c-ae2a-d6c3cd3c55b0)
+
+
+![image](https://github.com/user-attachments/assets/496ff7c6-37b2-4fc8-b2b8-d80f6fca3236)
+
+![image](https://github.com/user-attachments/assets/30b851b6-3c28-4d73-91ed-fe2144970ab0)
+
+Backend sudah berjalan
+
+![image](https://github.com/user-attachments/assets/49e67aa1-5f0b-4989-9903-25a94f7629fa)
+
+---
+
+## Frontend
+
+Buat Dockerfile dengan multiple stage build untuk mendapatkan image yang ringan
+
+```dockerfile
+FROM node:16-alpine AS builder
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm install --legacy-peer-deps
+
+COPY . .
+
+RUN npm run build
+
+FROM nginx:alpine
+
+COPY --from=builder /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+Buat Konfigurasi Docker Compose Frontend
+
+![image](https://github.com/user-attachments/assets/6982f552-05ce-4e65-901e-8ea4c9746858)
+
+
+Frontend sudah berjalan
+
+![image](https://github.com/user-attachments/assets/1c49b19b-fb08-4d7c-bac2-8c2c43af4604)
