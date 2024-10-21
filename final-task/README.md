@@ -2,7 +2,7 @@
 
 ## Architecture
 
-![image](https://github.com/user-attachments/assets/17914a7b-2906-4ea4-ab01-31cbbca045e0)
+![image](https://github.com/user-attachments/assets/987cd4ee-e8e4-4941-9d1a-195c6f0f6eeb)
 
 
 ## Tasks
