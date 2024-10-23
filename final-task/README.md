@@ -1,8 +1,10 @@
  # FINAL TASK DEVOPS DUMBWAYS BATCH 21
 
-## Flow
+## Project Architecture 
 
-![image](https://github.com/user-attachments/assets/987cd4ee-e8e4-4941-9d1a-195c6f0f6eeb)
+![image](https://github.com/user-attachments/assets/7779a86f-5018-48a4-b194-764e70e95ed1)
+
+
 
 
 ## Tasks
